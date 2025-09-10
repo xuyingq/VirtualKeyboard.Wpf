@@ -3,6 +3,7 @@
                     xmlns:converters="clr-namespace:VirtualKeyboard.Wpf.Converters">
     <converters:UppercaseTypographyConverter x:Key="UppercaseConverter"/>
     <converters:KeyboardTypeConverter x:Key="KeyboardTypeConverter"/>
+    <converters:ContentCaseConverter x:Key="ContentCaseConverter"/>
     
     <Style TargetType="Viewbox">
         <Setter Property="Width" Value="{DynamicResource KeyboardIconSize}"/>
@@ -30,7 +31,35 @@
     <Button Style="{DynamicResource KeyboardButtonStyle}" x:Key="CasingButton" Command="{Binding ChangeCasing}">
         <Viewbox>
             <Canvas Width="24" Height="24">
-                <Path Data="M15,18V12H17.17L12,6.83L6.83,12H9V18H15M12,4L22,14H17V20H7V14H2L12,4Z">
+                <!-- 未选中状态：小写图标 -->
+                <Path Fill="{StaticResource KeyboardForegroundBrush}" Data="M15,18V12H17.17L12,6.83L6.83,12H9V18H15M12,4L22,14H17V20H7V14H2L12,4Z">
+                    <Path.Style>
+                        <Style TargetType="Path">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Uppercase}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Uppercase}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                </Path>
+                <!-- 选中状态：大写图标 -->
+                <Path Fill="{StaticResource KeyboardBackgroundAccentBrush}" Data="M15,18V12H17.17L12,6.83L6.83,12H9V18H15M12,4L22,14H17V20H7V14H2L12,4Z">
+                    <Path.Style>
+                        <Style TargetType="Path">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Uppercase}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Uppercase}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
                 </Path>
             </Canvas>
         </Viewbox>

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="Controls\AdvancedTextBox.cs" />
+    <Compile Include="Converters\ContentCaseConverter.cs" />
     <Compile Include="Converters\KeyboardTypeConverter.cs" />
     <Compile Include="Converters\UppercaseTypographyConverter.cs" />
     <Compile Include="DefaultKeyboardHost.xaml.cs">
